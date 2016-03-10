@@ -1,16 +1,25 @@
 var predator = (function() {
   var carnivore = []
   var herbivore = []
-
-
-
 return {
+  loadPred: function(func) {
+    var carn = new XMLHttpRequest();
+    carn.addEventListener("load", func);
+    carn.open("GET", "carnivore.json");
+    carn.send();
+  },
+  loadHerb: function(func) {
+    var herb = new XMLHttpRequest();
+    herb.addEventListener("load", func);
+    herb.open("GET", "herbivore.json");
+    herb.send();
+  },
   onPred: function() {
     var carnivores = JSON.parse(this.responseText)
     for (i in carnivores.carnivores) {
       carnivore[i] = carnivores.carnivores[i]
     }
-    carni()
+    showCarn()
   },
   getPreds: function() {
     return carnivore
@@ -20,7 +29,7 @@ return {
     for (i in herbivores.herbivores) {
       herbivore[i] = herbivores.herbivores[i]
     }
-    herbi()
+    showHerb()
   },
   getHerb: function() {
     return herbivore
@@ -28,16 +37,3 @@ return {
 }
 
 }())
-
-function carni() {
-  var fuckThis = predator.getPreds()
-  for (i in fuckThis) {
-    document.getElementById('carnivore').innerHTML += `<h3>${fuckThis[i]}</h3>`
-  };
-}
-function herbi() {
-  var fuckThis = predator.getHerb()
-  for (i in fuckThis) {
-    document.getElementById('herbivore').innerHTML += `<h3>${fuckThis[i]}</h3>`
-  };
-}

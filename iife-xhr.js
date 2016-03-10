@@ -1,10 +1,14 @@
-var carn = new XMLHttpRequest();
-carn.addEventListener("load", predator.onPred);
-carn.open("GET", "carnivore.json");
-carn.send();
-
-var herb = new XMLHttpRequest();
-herb.addEventListener("load", predator.onHerb);
-herb.open("GET", "herbivore.json");
-herb.send();
-
+function showHerb() {
+  var das = predator.getHerb()
+  for (i in das) {
+    document.getElementById("herbivore").innerHTML += `<h3>${das[i]}</h3>`
+  };
+}
+function showCarn() {
+  var das = predator.getPreds()
+  for (i in das) {
+    document.getElementById("carnivore").innerHTML += `<h3>${das[i]}</h3>`
+  };
+}
+predator.loadPred(predator.onPred)
+predator.loadHerb(predator.onHerb)
